@@ -1,8 +1,118 @@
+# Candy Machine
+```
+git clone https://github.com/tigthor/candy_machine.git
+cp bin/macos/candy_machine ~/bin
+```
+## Prerequisites
+
+Read the Solana Command-line Guide
+https://docs.solana.com/cli
+
+Install the Solana Command-line Tools
+https://docs.solana.com/cli/install-solana-cli-tools
+
+## devnet for the win
+
+Devnet serves as a playground for anyone who wants to take Solana for a test drive, as a user, token holder, app developer, or NFT publisher. NFT publishers should target devnet before going for mainnet.
+
+I highly recommend making devnet your default solana url:
+
+`solana config set --url https://api.devnet.solana.com`
+
+Create devnet wallet (for testing)
+Read the fine manual
+`solana-keygen help new`
+
+If your me, you’ll redact your mnemonic, store it somewhere safe and take advantage of the --outfile flag.
+```bash
+solana-keygen new --outfile ~/.config/solana/devnet.json
+```
+#### Generating a new keypair
+`solana config set --keypair ~/.config/solana/devnet.json`
+
+### .json Metadata format
+
+```
+{
+  "name": "Solbabes #4381",
+  "symbol": "",
+  "description":"Solbabes #4381 solbabes.art",
+  "seller_fee_basis_points": 600,
+  "image": "image.png",
+  "properties": {
+    "creators": [
+      {
+        "address": "ANjT258doJD2bvdGMmLTG7vMQusVcbeptpEN7stbDVwB",
+        "share": 100
+      }
+    ],
+    "files": [{ "uri": "4381.png", "type": "image/png" }]
+  },
+  "attributes": [
+    {
+      "trait_type": "Backgrounds", 
+      "value": "Red"
+    }, 
+    {
+      "trait_type": "Body Color", 
+      "value": "Light-Yellow"
+    }, 
+    {
+      "trait_type": "Tattoo", 
+      "value": "Just Hands"
+    }, 
+    {
+      "trait_type": "EyeBrows", 
+      "value": "Blue"
+    }, 
+    {
+      "trait_type": "Eye Color", 
+      "value": "Green"
+    }, 
+    {
+      "trait_type": "Bikinis", 
+      "value": "Style 7  Pink"
+    }, 
+    { 
+      "trait_type": "Glasses", 
+      "value": "Round"
+    }, 
+    {
+      "trait_type": "Hair", 
+      "value": "Top Knot Black"
+    }
+  ]
+}
+```
+# Uploading
+### Organizing your project assets
+Here’s how you should organize the files you want to upload.Notice that these come in numerical pairs. eg: 4.png and 4.json are two halves of the NFT – one is the art, the other is the metadata. If you have a 10k collection, then there should be 20k files in this directory.
+
+Also notice that we’re starting with 0.json + 0.png, because that’s the default value for the --start-with. Staying close the defaults ensures you don’t have surprises like publishing fewer NFTs than you meant to.
+
+run this command to upload
+```
+candy_machine upload ./assets --url https://api.devnet.solana.com --keypair ~/.config/solana/devnet.json
+```
+## create candy machine store
+```
+candy_machine create_candy_machine -k ~/.config/solana/devnet.json
+```
+
+## Mint token
+```
+candy_machine mint_one_token -k ~/.config/solana/devnet.json
+```
+## Import private key to Phantom
+* Copy ~/.config/solana/devnet.json 
+* open phantom and add new wallet
+* use phantom import wallet feature
+* paste the ~/.config/solana/devnet.json
+
+
 # generative-art-node
 
 Create generative art by using the canvas api and node js
-
-![](https://github.com/HashLips/generative-art-node/blob/main/src/preview.png)
 
 ## Installation
 
